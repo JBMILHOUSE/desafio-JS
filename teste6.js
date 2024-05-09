@@ -20,33 +20,37 @@ let Objeto = {
     tocosSadios: [26, 24, 13, 47, 42, 22, 19, 10, 33, 24, 21, 6, 13, 25, 37, 21, 26, 6, 30]
   }
 };
-
-/*
-  Retorna a soma de todos os arrays para cada uma das avaliações.
-*/
-
-function calcularSomaArrays(objeto) {
+/**
+ * Encontre a porcentagem de tocos sadios e doentes 
+ * baseado nos avaliados "(sadios / avaliados) * 100", "(doentes / avaliados) * 100". 
+ */
+function calcularPorcentagemSadiosDoentes(objeto) {
     const avaliacoes = ['Avaliacao1', 'Avaliacao2', 'Avaliacao3'];
   
     const resultado = {};
   
     avaliacoes.forEach(avaliacao => {
-      resultado[avaliacao] = {};
+      const tocosAvaliados = objeto[avaliacao].tocosAvaliados.length;
+      const tocosSadios = objeto[avaliacao].tocosSadios.reduce((acc, val) => acc + val, 0);
+      const tocosDoentes = objeto[avaliacao].tocosDoentes.reduce((acc, val) => acc + val, 0);
   
-      Object.keys(objeto[avaliacao]).forEach(chave => {
-        resultado[avaliacao][chave] = objeto[avaliacao][chave].reduce((acc, val) => acc + val, 0);
-      });
+      const porcentagemSadios = (tocosSadios / tocosAvaliados) * 100;
+      const porcentagemDoentes = (tocosDoentes / tocosAvaliados) * 100;
+  
+      resultado[avaliacao] = {
+        porcentagemSadios: isNaN(porcentagemSadios) ? 0 : porcentagemSadios.toFixed(2) + "%",
+        porcentagemDoentes: isNaN(porcentagemDoentes) ? 0 : porcentagemDoentes.toFixed(2) + "%"
+      };
     });
   
     return resultado;
   }
   
-  const somaArrays = calcularSomaArrays(Objeto);
+  const porcentagens = calcularPorcentagemSadiosDoentes(Objeto);
   
-  Object.keys(somaArrays).forEach(avaliacao => {
-    console.log(avaliacao + ':');
-    Object.keys(somaArrays[avaliacao]).forEach(chave => {
-      console.log(`${chave}: ${somaArrays[avaliacao][chave]}`);
-    });
+  Object.keys(porcentagens).forEach(avaliacao => {
+    console.log(avaliacao + ":");
+    console.log(`Porcentagem de tocos sadios: ${porcentagens[avaliacao].porcentagemSadios}`);
+    console.log(`Porcentagem de tocos doentes: ${porcentagens[avaliacao].porcentagemDoentes}`);
   });
   

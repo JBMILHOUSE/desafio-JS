@@ -1,3 +1,4 @@
+
 let Objeto = {
   Usuario: 'test',
   Fazenda: 'teste',
@@ -20,33 +21,39 @@ let Objeto = {
     tocosSadios: [26, 24, 13, 47, 42, 22, 19, 10, 33, 24, 21, 6, 13, 25, 37, 21, 26, 6, 30]
   }
 };
-
 /**
- * Verificar a quantidade de posições em cada um dos arrays das avaliações:
+ * Encontre a porcentagem de tocos sadios e doentes baseado nos avaliados para cada posição dos arrays, 
+ * essa porcentagem deve ser calculada apenas quando os avaliados forem igual a soma de sadios e doentes
  */
-
-function verificarQuantidadePosicoes(objeto) {
+function calcularPorcentagemSadiosDoentesPorPosicao(objeto) {
     const avaliacoes = ['Avaliacao1', 'Avaliacao2', 'Avaliacao3'];
-  
-    const resultado = {};
+    const resultados = {};
   
     avaliacoes.forEach(avaliacao => {
-      resultado[avaliacao] = {};
+      const avaliados = objeto[avaliacao].tocosAvaliados;
+      const doentes = objeto[avaliacao].tocosDoentes;
+      const sadios = objeto[avaliacao].tocosSadios;
   
-      Object.keys(objeto[avaliacao]).forEach(chave => {
-        resultado[avaliacao][chave] = objeto[avaliacao][chave].length;
-      });
+      resultados[avaliacao] = [];
+  
+      for (let i = 0; i < avaliados.length; i++) {
+        if (avaliados[i] === (doentes[i] + sadios[i])) {
+          const porcentagemSadios = 0;
+          const porcentagemDoentes = 0;
+          resultados[avaliacao].push({ ponto: i, porcentagemSadios, porcentagemDoentes });
+        }
+      }
     });
   
-    return resultado;
+    return resultados;
   }
   
-  const quantidadePosicoes = verificarQuantidadePosicoes(Objeto);
+  const porcentagensPorPosicao = calcularPorcentagemSadiosDoentesPorPosicao(Objeto);
   
-  Object.keys(quantidadePosicoes).forEach(avaliacao => {
-    console.log(avaliacao + ':');
-    Object.keys(quantidadePosicoes[avaliacao]).forEach(chave => {
-      console.log(`${chave}: ${quantidadePosicoes[avaliacao][chave]}`);
+  Object.keys(porcentagensPorPosicao).forEach(avaliacao => {
+    console.log(`${avaliacao}:`);
+    porcentagensPorPosicao[avaliacao].forEach(ponto => {
+      console.log(`Ponto ${ponto.ponto}: ${ponto.porcentagemSadios}% sadios, ${ponto.porcentagemDoentes}% doentes`);
     });
   });
   
