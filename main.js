@@ -15,9 +15,9 @@ let Objeto = {
       tocossadios: [16, 5, 0, 24, 24, 25, 18, 11, 23, 8, 37, 25, 13, 3, 11, 16, 25, 8, 22, 2, 27]
     },
     avaliacao3: {
-      tocosavaliados: [50, 25, 13, 80, 95, 38, 28, 58, 12, 99, 70, 10, 23, 55, 88, 21, 75, 6, 70, 60],
-      tocodoentes: [15, 27, 7, 48, 41, 5, 6, 33, 3, 56, 44, 38, 1, 8, 22, 39, 13, 50, 0, 49],
-      tocossadios: [35, 8, 6, 32, 54, 33, 22, 25, 9, 43, 26, 32, 22, 10, 33, 36, 12, 20, 6, 21]
+      tocosavaliados: [50, 35, 18, 80, 92, 38, 29, 65, 20, 100, 55, 82, 10, 25, 55, 90, 30, 70, 8, 62],
+      tocodoentes: [25, 11, 5, 33, 50, 16, 10, 36, 9, 67, 31, 61, 5, 12, 30, 53, 9, 44, 2, 31],
+      tocossadios: [26, 24, 13, 47, 42, 22, 19, 10, 33, 24, 21, 6, 13, 25, 37, 21, 26, 6, 30]
     }
   };
   
@@ -28,7 +28,7 @@ let Objeto = {
    *  por exemplo na avaliacao1 na posição 0 dos arrays foram avaliados 63 tocos 
    * onde 19 estavam doentes e 44 estavam sadios 
    */
-  
+
   // Função para calcular a média de tocos doentes por avaliação
   function calcularMediaDoentes(avaliacao) {
     const totalDoentes = avaliacao.tocodoentes.reduce((acc, val) => acc + val, 0);
